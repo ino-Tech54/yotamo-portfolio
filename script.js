@@ -74,8 +74,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Hide overlay
                     overlay.style.opacity = '0';
                     setTimeout(() => overlay.remove(), 300);
+
+                    // Close mobile menu if open
+                    if (typeof closeMobileMenu === 'function') {
+                        closeMobileMenu();
+                    }
                 }, 400);
             }, 50);
         });
     });
+
+    // Mobile Menu Toggle Logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    function toggleMobileMenu() {
+        sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        if (sidebar.classList.contains('open')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
+    }
+
+    function closeMobileMenu() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMobileMenu);
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeMobileMenu);
+    }
 });
