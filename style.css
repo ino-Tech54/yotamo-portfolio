@@ -490,12 +490,16 @@ body {
 
     .top-bar { 
         height: auto; 
-        padding: 2rem 1.5rem; 
+        padding: 1.5rem 60px 1.5rem 1.5rem; /* Room for hamburger toggle */
         flex-direction: column; 
-        text-align: center; 
+        text-align: left; /* Keep it left-aligned to fit name better */
+        align-items: flex-start;
     }
 
-    .top-bar h1 { font-size: 1.6rem; }
+    .top-bar h1 { 
+        font-size: 1.3rem; 
+        max-width: 80%; /* Don't overlap toggle */
+    }
     .contact-strip { 
         flex-direction: column; 
         gap: 0.5rem; 
