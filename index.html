@@ -170,19 +170,27 @@
                         <p>Selected certificates completed during training.</p>
                         <div class="certificate-grid">
                             <figure class="certificate-card">
-                                <img src="assets/images/Computers.jpeg" alt="Computer Operations Certificate">
+                                <button class="certificate-button" type="button">
+                                    <img src="assets/images/Computers.jpeg" alt="Computer Operations Certificate">
+                                </button>
                                 <figcaption>Computer Operations</figcaption>
                             </figure>
                             <figure class="certificate-card">
-                                <img src="assets/images/Food%20%26%20Bev.jpeg" alt="Food and Beverage Certificate">
+                                <button class="certificate-button" type="button">
+                                    <img src="assets/images/Food%20%26%20Bev.jpeg" alt="Food and Beverage Certificate">
+                                </button>
                                 <figcaption>Food & Beverage</figcaption>
                             </figure>
                             <figure class="certificate-card">
-                                <img src="assets/images/Food%20prep.jpeg" alt="Food Preparation Certificate">
+                                <button class="certificate-button" type="button">
+                                    <img src="assets/images/Food%20prep.jpeg" alt="Food Preparation Certificate">
+                                </button>
                                 <figcaption>Food Preparation</figcaption>
                             </figure>
                             <figure class="certificate-card">
-                                <img src="assets/images/House%20keeping.jpeg" alt="Housekeeping Certificate">
+                                <button class="certificate-button" type="button">
+                                    <img src="assets/images/House%20keeping.jpeg" alt="Housekeeping Certificate">
+                                </button>
                                 <figcaption>Housekeeping</figcaption>
                             </figure>
                         </div>
@@ -190,6 +198,27 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <div class="certificate-modal" id="certificate-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="certificate-modal__backdrop" data-close="true"></div>
+        <div class="certificate-modal__content" role="document">
+            <button class="certificate-modal__close" type="button" aria-label="Close certificate" data-close="true">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="certificate-modal__stage">
+                <button class="certificate-modal__nav" type="button" data-prev="true" aria-label="Previous certificate">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <figure class="certificate-modal__figure">
+                    <img id="certificate-modal-image" src="" alt="">
+                    <figcaption id="certificate-modal-caption"></figcaption>
+                </figure>
+                <button class="certificate-modal__nav" type="button" data-next="true" aria-label="Next certificate">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

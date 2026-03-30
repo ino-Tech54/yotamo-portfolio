@@ -116,4 +116,88 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sidebarOverlay) {
         sidebarOverlay.addEventListener('click', closeMobileMenu);
     }
+
+    // Certificate modal viewer
+    const certificateButtons = Array.from(document.querySelectorAll('.certificate-button'));
+    const modal = document.getElementById('certificate-modal');
+    const modalImage = document.getElementById('certificate-modal-image');
+    const modalCaption = document.getElementById('certificate-modal-caption');
+    const closeTargets = document.querySelectorAll('[data-close="true"]');
+    const prevButton = document.querySelector('[data-prev="true"]');
+    const nextButton = document.querySelector('[data-next="true"]');
+    let activeIndex = 0;
+
+    function openModal(index) {
+        if (!modal || !modalImage || !modalCaption) return;
+        activeIndex = index;
+        const img = certificateButtons[activeIndex].querySelector('img');
+        modalImage.src = img.getAttribute('src');
+        modalImage.alt = img.getAttribute('alt') || 'Certificate';
+        modalCaption.textContent = certificateButtons[activeIndex].parentElement.querySelector('figcaption')?.textContent || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        updateNavButtons();
+        modalImage.focus?.();
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function updateNavButtons() {
+        if (!prevButton || !nextButton) return;
+        prevButton.disabled = activeIndex === 0;
+        nextButton.disabled = activeIndex === certificateButtons.length - 1;
+    }
+
+    function showNext() {
+        if (activeIndex < certificateButtons.length - 1) {
+            openModal(activeIndex + 1);
+        }
+    }
+
+    function showPrev() {
+        if (activeIndex > 0) {
+            openModal(activeIndex - 1);
+        }
+    }
+
+    certificateButtons.forEach((button, index) => {
+        button.addEventListener('click', () => openModal(index));
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(index);
+            }
+        });
+    });
+
+    closeTargets.forEach(target => {
+        target.addEventListener('click', closeModal);
+    });
+
+    if (prevButton) {
+        prevButton.addEventListener('click', showPrev);
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', showNext);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!modal || !modal.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+        if (e.key === 'ArrowRight') {
+            showNext();
+        }
+        if (e.key === 'ArrowLeft') {
+            showPrev();
+        }
+    });
 });
